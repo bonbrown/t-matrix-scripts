@@ -16,9 +16,7 @@ import re
 
 pth = '/Users/brbrown/tools/t-matrix/'
 ltfile = 'lookup.txt'
-#outfile = 'test'
 
-#fmt = '%7.5f %11.5e %11.5e %11.5e %11.5e\n'
 # format for julia complex numbers
 fmt = '%7.5f [%11.5e+(%11.5e)im] [%11.5e+(%11.5e)im]\n'
 
@@ -38,11 +36,9 @@ for r in sizes:
     newfile = ds+'mm'
     
     # recompile for various sizes and run
-    #os.system('rm ampld.lp.f')
     os.system('touch '+newfile)
     os.system('./write_newsize_tmatrix.sh '+rs+' \\\''+newfile+'\\\'')
     os.system('./makeit')
-    #os.system('rm test')
     os.system('./t-matrix')
 
 
