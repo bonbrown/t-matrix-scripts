@@ -33,11 +33,17 @@ C  OPEN FILES *******************************************************
 C  INPUT DATA ********************************************************
 
       AXI=${psize}D0
-      RAT=0.10 D0
+      RAT=1.0 D0
       LAM=100.0D0
       MRR=8.88 D0
       MRI=0.63 D0
-      EPS=2.000000001 D0
+      DIAM=AXI*2.0
+      EPS=0.9951 D0
+      EPS=EPS+0.02510*DIAM-0.03644*DIAM*DIAM
+      EPS=EPS+0.005303*DIAM*DIAM*DIAM
+      EPS=EPS-0.0002492*DIAM*DIAM*DIAM*DIAM
+      EPS = 1.0/EPS
+c      EPS=1.000000001 D0
       NP=-1
       DDELT=0.001D0
       NDGS=2
@@ -47,6 +53,7 @@ C  INPUT DATA ********************************************************
       IF (NP.EQ.-1.OR.NP.EQ.-2) NCHECK=1
       IF (NP.GT.0.AND.(-1)**NP.EQ.1) NCHECK=1
       WRITE (6,5454) NCHECK
+
  5454 FORMAT ('NCHECK=',I1)
       IF (DABS(RAT-1D0).GT.1D-8.AND.NP.EQ.-1) CALL SAREA (EPS,RAT)
       IF (DABS(RAT-1D0).GT.1D-8.AND.NP.GE.0) CALL SURFCH(NP,EPS,RAT)
